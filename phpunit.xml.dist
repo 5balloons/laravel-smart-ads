@@ -36,4 +36,7 @@
     <logging>
         <junit outputFile="build/report.junit.xml"/>
     </logging>
+    <php>
+        <env name="DB_CONNECTION" value="testing" />
+    </php>
 </phpunit>
