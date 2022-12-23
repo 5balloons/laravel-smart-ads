@@ -15,7 +15,7 @@ class CreateLaravelAdsTable extends Migration
     {
         Schema::create('laravel_ads', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('body');
             $table->integer('views')->nullable();
             $table->integer('clicks')->nullable();

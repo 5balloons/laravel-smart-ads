@@ -11,6 +11,8 @@ class LaravelAd extends Model{
     
     use HasFactory;
 
+    protected $table = 'laravel_ads';
+
     protected static function newFactory()
     {
         return LaravelAdFactory::new();

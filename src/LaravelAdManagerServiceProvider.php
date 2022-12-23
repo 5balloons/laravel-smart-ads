@@ -2,9 +2,11 @@
 
 namespace _5balloons\LaravelAdManager;
 
+use Livewire\Livewire;
 use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use _5balloons\LaravelAdManager\Http\Livewire\LaravelAdComponent;
 
 class LaravelAdManagerServiceProvider extends PackageServiceProvider
 {
@@ -13,8 +15,19 @@ class LaravelAdManagerServiceProvider extends PackageServiceProvider
     {
         $package
         ->name('laravel-ad-manager')
+        ->hasViews()
         ->hasRoute('web')
         ->hasMigration('create_laravel_ads_table');
+
+    }
+
+    public function bootingPackage()
+    {
+        $this->registerLivewireComponents();
+    }
+
+    public function registerLivewireComponents(){
+        Livewire::component('laravel-ad-component', LaravelAdComponent::class);
     }
 
     /**

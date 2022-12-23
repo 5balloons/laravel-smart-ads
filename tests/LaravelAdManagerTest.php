@@ -2,38 +2,14 @@
 
 namespace _5balloons\LaravelAdManager\Tests;
 
-use Orchestra\Testbench\TestCase;
 use _5balloons\LaravelAdManager\Models\LaravelAd;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use _5balloons\LaravelAdManager\LaravelAdManagerFacade;
-use _5balloons\LaravelAdManager\LaravelAdManagerServiceProvider;
+use _5balloons\LaravelAdManager\Tests\LaravelAdManagerTestCase as TestCase;
 
 class LaravelAdManagerTest extends TestCase
 {
 
     use RefreshDatabase;
-
-    protected function getPackageProviders($app){
-        return[
-            LaravelAdManagerServiceProvider::class
-        ];
-    }
-
-    protected function getPackageAliases($app)
-    {
-        return[
-            'LaravelAdManager' => LaravelAdManagerFacade::class
-        ];
-    }
-
-    public function getEnvironmentSetUp($app)
-    {
-        // import the CreatePostsTable class from the migration
-        require_once __DIR__ . '/../database/migrations/create_laravel_ads_table.php.stub';
-
-        // run the up() method of that migration class
-        (new \CreateLaravelAdsTable)->up();
-    }
 
     /** @test */
     public function it_asserts_a_laravel_ad_has_a_name(){
