@@ -1,10 +1,10 @@
 <?php
 
-namespace _5balloons\LaravelAdManager\Http\Controllers;
+namespace _5balloons\LaravelSmartAds\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 
-class LaravelAdManagerController extends Controller{
+class LaravelSmartAdsController extends Controller{
 
 
     public function index(){

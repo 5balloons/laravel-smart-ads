@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLaravelAdsTable extends Migration
+class CreateSmartAdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLaravelAdsTable extends Migration
      */
     public function up()
     {
-        Schema::create('laravel_ads', function (Blueprint $table) {
+        Schema::create('smart_ads', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->text('body');
@@ -32,6 +32,6 @@ class CreateLaravelAdsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laravel_ads');
+        Schema::dropIfExists('smart_ads');
     }
 }

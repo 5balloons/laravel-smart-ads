@@ -1,23 +1,23 @@
 <?php
 
-namespace _5balloons\LaravelAdManager;
+namespace _5balloons\LaravelSmartAds;
 
 use Livewire\Livewire;
 use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use _5balloons\LaravelAdManager\Http\Livewire\LaravelAdComponent;
+use _5balloons\LaravelSmartAds\Http\Livewire\SmartAdComponent;
 
-class LaravelAdManagerServiceProvider extends PackageServiceProvider
+class LaravelSmartAdsServiceProvider extends PackageServiceProvider
 {
 
     public function configurePackage(Package $package): void
     {
         $package
-        ->name('laravel-ad-manager')
+        ->name('laravel-smart-ads')
         ->hasViews()
         ->hasRoute('web')
-        ->hasMigration('create_laravel_ads_table');
+        ->hasMigration('create_smart_ads_table');
 
     }
 
@@ -27,7 +27,7 @@ class LaravelAdManagerServiceProvider extends PackageServiceProvider
     }
 
     public function registerLivewireComponents(){
-        Livewire::component('laravel-ad-component', LaravelAdComponent::class);
+        Livewire::component('laravel-ad-component', SmartAdComponent::class);
     }
 
     /**
@@ -36,8 +36,8 @@ class LaravelAdManagerServiceProvider extends PackageServiceProvider
     public function registeringPackage()
     {
          // Register the main class to use with the facade
-         $this->app->singleton('laravel-ad-manager', function () {
-             return new LaravelAdManager;
+         $this->app->singleton('laravel-smart-ads', function () {
+             return new LaravelSmartAds;
          });
     }
 

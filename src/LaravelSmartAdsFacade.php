@@ -1,13 +1,13 @@
 <?php
 
-namespace _5balloons\LaravelAdManager;
+namespace _5balloons\LaravelSmartAds;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \5balloons\LaravelAdManager\Skeleton\SkeletonClass
+ * @see \5balloons\LaravelSmartAds\Skeleton\SkeletonClass
  */
-class LaravelAdManagerFacade extends Facade
+class LaravelSmartAdsFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class LaravelAdManagerFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'laravel-ad-manager';
+        return 'laravel-smart-ads';
     }
 }

@@ -1,11 +1,11 @@
 {
-    "name": "5balloons/laravel-ad-manager",
+    "name": "5balloons/laravel-smart-ads",
     "description": "Ad, Banners, Callouts Manager for Laravel",
     "keywords": [
         "5balloons",
-        "laravel-ad-manager"
+        "laravel-smart-ads"
     ],
-    "homepage": "https://github.com/5balloons/laravel-ad-manager",
+    "homepage": "https://github.com/5balloons/laravel-smart-ads",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -18,22 +18,22 @@
     "require": {
         "php": "^7.4|^8.0",
         "illuminate/support": "^9.0",
-        "livewire/livewire": "^2.10"
+        "livewire/livewire": "^2.10",
+        "spatie/laravel-package-tools": "^1.13"
     },
     "require-dev": {
         "orchestra/testbench": "^7.0",
-        "phpunit/phpunit": "^9.0",
-        "spatie/laravel-package-tools": "^1.13"
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
-            "_5balloons\\LaravelAdManager\\": "src",
-            "_5balloons\\LaravelAdManager\\Database\\Factories\\": "database/factories"
+            "_5balloons\\LaravelSmartAds\\": "src",
+            "_5balloons\\LaravelSmartAds\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_5balloons\\LaravelAdManager\\Tests\\": "tests"
+            "_5balloons\\LaravelSmartAds\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -47,10 +47,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "_5balloons\\LaravelAdManager\\LaravelAdManagerServiceProvider"
+                "_5balloons\\LaravelSmartAds\\LaravelSmartAdsServiceProvider"
             ],
             "aliases": {
-                "LaravelAdManager": "_5balloons\\LaravelAdManager\\LaravelAdManagerFacade"
+                "LaravelSmartAds": "_5balloons\\LaravelSmartAds\\LaravelSmartAdsFacade"
             }
         }
     }

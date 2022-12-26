@@ -1,6 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use _5balloons\LaravelAdManager\Http\Controllers\LaravelAdManagerController;
+use _5balloons\LaravelSmartAds\Http\Controllers\LaravelSmartAdsController;
 
-Route::get('/laravel-ad-manager', [LaravelAdManagerController::class, 'index']);
+Route::get('/laravel-smart-ads', [LaravelSmartAdsController::class, 'index']);

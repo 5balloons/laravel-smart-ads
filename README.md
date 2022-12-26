@@ -1,8 +1,8 @@
 # Very short description of the package
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/5balloons/laravel-ad-manager.svg?style=flat-square)](https://packagist.org/packages/5balloons/laravel-ad-manager)
-[![Total Downloads](https://img.shields.io/packagist/dt/5balloons/laravel-ad-manager.svg?style=flat-square)](https://packagist.org/packages/5balloons/laravel-ad-manager)
-![GitHub Actions](https://github.com/5balloons/laravel-ad-manager/actions/workflows/main.yml/badge.svg)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/5balloons/laravel-smart-ads.svg?style=flat-square)](https://packagist.org/packages/5balloons/laravel-smart-ads)
+[![Total Downloads](https://img.shields.io/packagist/dt/5balloons/laravel-smart-ads.svg?style=flat-square)](https://packagist.org/packages/5balloons/laravel-smart-ads)
+![GitHub Actions](https://github.com/5balloons/laravel-smart-ads/actions/workflows/main.yml/badge.svg)
 
 This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
 
@@ -11,7 +11,7 @@ This is where your description should go. Try and limit it to a paragraph or two
 You can install the package via composer:
 
 ```bash
-composer require 5balloons/laravel-ad-manager
+composer require 5balloons/laravel-smart-ads
 ```
 
 ## Usage

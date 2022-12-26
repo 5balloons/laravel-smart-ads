@@ -1,14 +1,14 @@
 <?php
 
-namespace _5balloons\LaravelAdManager\Tests;
+namespace _5balloons\LaravelSmartAds\Tests;
 
 use Orchestra\Testbench\TestCase;
 use Illuminate\Support\Facades\View;
 use Livewire\LivewireServiceProvider;
-use _5balloons\LaravelAdManager\LaravelAdManagerFacade;
-use _5balloons\LaravelAdManager\LaravelAdManagerServiceProvider;
+use _5balloons\LaravelSmartAds\LaravelSmartAdsFacade;
+use _5balloons\LaravelSmartAds\LaravelSmartAdsServiceProvider;
 
-class LaravelAdManagerTestCase extends TestCase
+class LaravelSmartAdsTestCase extends TestCase
 {
     protected function setUp(): void
     {
@@ -21,14 +21,14 @@ class LaravelAdManagerTestCase extends TestCase
     protected function getPackageProviders($app){
         return[
             LivewireServiceProvider::class,
-            LaravelAdManagerServiceProvider::class,
+            LaravelSmartAdsServiceProvider::class,
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return[
-            'LaravelAdManager' => LaravelAdManagerFacade::class
+            'LaravelSmartAds' => LaravelSmartAdsFacade::class
         ];
     }
 
@@ -40,9 +40,9 @@ class LaravelAdManagerTestCase extends TestCase
         ]);
 
         // import the CreatePostsTable class from the migration
-        require_once __DIR__ . '/../database/migrations/create_laravel_ads_table.php.stub';
+        require_once __DIR__ . '/../database/migrations/create_smart_ads_table.php.stub';
 
         // run the up() method of that migration class
-        (new \CreateLaravelAdsTable)->up();
+        (new \CreateSmartAdsTable)->up();
     }
 }
