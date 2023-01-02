@@ -17,6 +17,7 @@ class LaravelSmartAdsServiceProvider extends PackageServiceProvider
         ->name('laravel-smart-ads')
         ->hasViews()
         ->hasRoute('web')
+        ->hasAssets()
         ->hasMigration('create_smart_ads_table');
 
     }

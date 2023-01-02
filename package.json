@@ -1,0 +1,32 @@
+{
+  "name": "laravel-smart-ads",
+  "version": "1.0.0",
+  "description": "[![Latest Version on Packagist](https://img.shields.io/packagist/v/5balloons/laravel-smart-ads.svg?style=flat-square)](https://packagist.org/packages/5balloons/laravel-smart-ads) [![Total Downloads](https://img.shields.io/packagist/dt/5balloons/laravel-smart-ads.svg?style=flat-square)](https://packagist.org/packages/5balloons/laravel-smart-ads) ![GitHub Actions](https://github.com/5balloons/laravel-smart-ads/actions/workflows/main.yml/badge.svg)",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/5balloons/laravel-smart-ads.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/5balloons/laravel-smart-ads/issues"
+  },
+  "homepage": "https://github.com/5balloons/laravel-smart-ads#readme",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "laravel-mix": "^6.0.49",
+    "mix-tailwindcss": "^1.3.0",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.57.1",
+    "sass-loader": "^12.6.0",
+    "tailwindcss": "^3.2.4"
+  }
+}
