@@ -15,6 +15,7 @@ class LaravelSmartAdsServiceProvider extends PackageServiceProvider
     {
         $package
         ->name('laravel-smart-ads')
+        ->hasConfigFile()
         ->hasViews()
         ->hasRoute('web')
         ->hasAssets()

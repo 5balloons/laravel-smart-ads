@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use _5balloons\LaravelSmartAds\Http\Controllers\SmartAdManagerController;
 
-Route::group([ 'prefix' => '', 'middleware' => 'web'], function () {
+
+$prefix = config('smart-ads.route.prefix');
+$middleware = config('smart-ads.route.middleware');
+
+Route::group(['prefix' => $prefix, 'middleware' => $middleware], function () {
     Route::get('/smart-ad-manager', [SmartAdManagerController::class, 'index']);
     Route::get('/smart-ad-manager/ads/create', [SmartAdManagerController::class, 'create']);
     Route::get('/smart-ad-manager/ads/{smartAd}', [SmartAdManagerController::class, 'show']);
