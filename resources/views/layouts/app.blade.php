@@ -9,11 +9,13 @@
       rel="stylesheet"
     />
     <link href="{{asset('vendor/smart-ads/css/app.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/smart-ads/css/prism.css')}}" rel="stylesheet">
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
     <script src="{{asset('vendor/smart-ads/js/init-alpine.js')}}"></script>
+    <script src="{{asset('vendor/smart-ads/js/prism.js')}}"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
       defer

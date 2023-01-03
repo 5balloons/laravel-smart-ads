@@ -17,7 +17,9 @@
                 {{$smartAd->name}}
             </h4>
             <p class="text-gray-600 dark:text-gray-400">
-                {{ $smartAd->body }}
+                <pre><code class="lang-html">
+                    {{ $smartAd->body }}
+                </code></pre>
             </p>
             <p class="text-gray-600 mt-5">
             <div class="my-1 font-semibold">Usage</div>
