@@ -1,10 +1,10 @@
-# Very short description of the package
+# Ad Manager for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/5balloons/laravel-smart-ads.svg?style=flat-square)](https://packagist.org/packages/5balloons/laravel-smart-ads)
 [![Total Downloads](https://img.shields.io/packagist/dt/5balloons/laravel-smart-ads.svg?style=flat-square)](https://packagist.org/packages/5balloons/laravel-smart-ads)
 ![GitHub Actions](https://github.com/5balloons/laravel-smart-ads/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+Simple Ad, Banner, Callouts Manager for Laravel. 
 
 ## Installation
 
@@ -14,11 +14,40 @@ You can install the package via composer:
 composer require 5balloons/laravel-smart-ads
 ```
 
+The package will automatically register itself.
+
+Publishing Migrations (Required)
+
+```bash
+php artisan vendor:publish --provider="_5balloons\LaravelSmartAds\LaravelSmartAdsServiceProvider" --tag="smart-ads-migrations"
+```
+
+and then run migrate command to run the migrations
+
+```bash
+php artisan migrate
+```
+
+Publishing Assets (Required)
+
+```bash
+php artisan vendor:publish --provider="_5balloons\LaravelSmartAds\LaravelSmartAdsServiceProvider" --tag="smart-ads-assets"
+```
+This command will copy the necessary css and js files required to run the ad manager dashboard. 
+
+Publishing Config File (Optional)
+
+```bash
+php artisan vendor:publish --provider="_5balloons\LaravelSmartAds\LaravelSmartAdsServiceProvider" --tag="smart-ads-config"
+```
+
 ## Usage
 
-```php
-// Usage description here
-```
+The ad manager dashboard can now be accessed at `/smart-ad-manager`
+
+![alt text](https://raw.githubusercontent.com/5balloons/laravel-smart-ads/main/art/smart-ads-dashboard.png)
+
+
 
 ### Testing
 
@@ -40,13 +69,10 @@ If you discover any security related issues, please email tushar@5balloons.info 
 
 ## Credits
 
--   [Tushar Gugnani](https://github.com/5balloons)
+-   [Tushar Gugnani](https://github.com/tushargugnani)
 -   [All Contributors](../../contributors)
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
