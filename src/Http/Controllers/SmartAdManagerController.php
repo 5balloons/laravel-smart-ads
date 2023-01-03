@@ -24,6 +24,7 @@ class SmartAdManagerController extends Controller{
     public function store(StoreSmartAdRequest $request){
         $smartAd = SmartAd::create([
             'name' => $request->name,
+            'slug' => $this->slug($request->name),
             'body' => $request->body
         ]);
         return redirect("/smart-ad-manager/ads/{$smartAd->id}")->with(['message' => 'Ad Created', 'color' => 'green']);
@@ -43,6 +44,12 @@ class SmartAdManagerController extends Controller{
     public function delete(SmartAd $smartAd){
         $smartAd->delete();
         return redirect('/smart-ad-manager')->with(['message' => 'Ad Deleted', 'color' => 'green']);
+    }
+
+    public function slug($data)
+    {
+        $ex = explode(' ', $data);
+        return implode('-', $ex);
     }
 }
 

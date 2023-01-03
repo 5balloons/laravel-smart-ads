@@ -12,7 +12,7 @@ class SmartAdComponent extends Component
 
     public function render()
     {
-        $smartAd = SmartAd::where('name', $this->ad)->first();
+        $smartAd = SmartAd::where('slug', $this->ad)->first();
 
         return view('smart-ads::livewire.smart-ad-component', compact('smartAd'));
     }

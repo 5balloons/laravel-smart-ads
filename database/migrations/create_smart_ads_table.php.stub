@@ -16,6 +16,7 @@ class CreateSmartAdsTable extends Migration
         Schema::create('smart_ads', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('slug');
             $table->text('body');
             $table->integer('views')->nullable();
             $table->integer('clicks')->nullable();

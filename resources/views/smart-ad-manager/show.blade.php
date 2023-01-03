@@ -24,7 +24,7 @@
             <p class="text-gray-600 mt-5">
             <div class="my-1 font-semibold">Usage</div>
             <div class="bg-gray-600 text-white rounded p-3">
-                <span>@</span>livewire('smart-ad-component', ['ad' => {{$smartAd->name}}])
+                <span>@</span>livewire('smart-ad-component', ['ad' => '{{$smartAd->slug}}'])
             </div>
             </p>
         </div>
