@@ -13,16 +13,18 @@
         @endif
 
         <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <div class="my-1 font-semibold text-gray-800">Ad Slug</div>
             <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
-                {{$smartAd->name}}
+                {{$smartAd->slug}}
             </h4>
+            <div class="my-1 font-semibold text-gray-800">Ad Body</div>
             <p class="text-gray-600 dark:text-gray-400">
                 <pre><code class="lang-html">
                     {{ $smartAd->body }}
                 </code></pre>
             </p>
             <p class="text-gray-600 mt-5">
-            <div class="my-1 font-semibold">Usage</div>
+            <div class="my-1 font-semibold text-gray-800">Usage</div>
             <div class="bg-gray-600 text-white rounded p-3">
                 <span>@</span>livewire('smart-ad-component', ['ad' => '{{$smartAd->slug}}'])
             </div>
