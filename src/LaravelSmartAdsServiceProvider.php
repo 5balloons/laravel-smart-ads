@@ -29,7 +29,7 @@ class LaravelSmartAdsServiceProvider extends PackageServiceProvider
     }
 
     public function registerLivewireComponents(){
-        Livewire::component('laravel-ad-component', SmartAdComponent::class);
+        Livewire::component('smart-ad-component', SmartAdComponent::class);
     }
 
     /**

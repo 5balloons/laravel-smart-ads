@@ -8,11 +8,11 @@ use _5balloons\LaravelSmartAds\Models\SmartAd;
 
 class SmartAdComponent extends Component
 {
-    public $adName;
+    public $ad;
 
     public function render()
     {
-        $smartAd = SmartAd::where('name', $this->adName)->first();
+        $smartAd = SmartAd::where('name', $this->ad)->first();
 
         return view('smart-ads::livewire.smart-ad-component', compact('smartAd'));
     }
