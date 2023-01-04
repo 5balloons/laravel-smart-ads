@@ -2,15 +2,18 @@
 
 namespace _5balloons\LaravelSmartAds\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use _5balloons\LaravelSmartAds\Models\SmartAd;
+use _5balloons\LaravelSmartAds\LaravelSmartAdsFacade;
 use _5balloons\LaravelSmartAds\Http\Requests\StoreSmartAdRequest;
 
 class SmartAdManagerController extends Controller{
 
     public function index(){
         $smartAds = SmartAd::paginate(10);
-        return view('smart-ads::smart-ad-manager.index', compact('smartAds'));
+        $totalClicks = SmartAd::sum('clicks');
+        return view('smart-ads::smart-ad-manager.index', compact('smartAds', 'totalClicks'));
     }
 
     public function show(SmartAd $smartAd){
@@ -39,6 +42,8 @@ class SmartAdManagerController extends Controller{
     public function update(StoreSmartAdRequest $request, SmartAd $smartAd){
         $smartAd->name = $request->name;
         $smartAd->body = $request->body;
+        $smartAd->position = $request->position;
+        $smartAd->selector = $request->selector;
         $smartAd->save();
         return redirect("/smart-ad-manager/ads/{$smartAd->id}")->with(['message' => 'Ad Edited', 'color' => 'green']);
     }
@@ -53,7 +58,15 @@ class SmartAdManagerController extends Controller{
         return $ads;
     }
 
-    public function slug($data)
+    /**
+     * Adds click count to the add
+     */
+    public function updateClicks(Request $request){
+        $slug = $request->get('slug');
+        LaravelSmartAdsFacade::updateClicks($slug);
+    }
+
+    protected function slug($data)
     {
         $ex = explode(' ', $data);
         return implode('-', $ex);

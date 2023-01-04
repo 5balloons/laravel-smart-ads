@@ -18,8 +18,8 @@ class CreateSmartAdsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug');
             $table->text('body');
-            $table->integer('views')->nullable();
-            $table->integer('clicks')->nullable();
+            $table->integer('views')->default(0);
+            $table->integer('clicks')->default(0);
             $table->boolean('enabled')->nullable();
             $table->string('position')->nullable();
             $table->string('selector')->nullable();

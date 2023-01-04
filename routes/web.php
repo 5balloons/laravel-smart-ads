@@ -18,3 +18,4 @@ Route::group(['prefix' => $prefix, 'middleware' => $middleware], function () {
 });
 
 Route::get('/smart-ads-auto-placements', [SmartAdManagerController::class, 'autoAds']);
+Route::post('/smart-ads-update-clicks', [SmartAdManagerController::class, 'updateClicks']);
