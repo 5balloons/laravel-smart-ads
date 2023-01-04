@@ -29,8 +29,7 @@ class SmartAdManagerController extends Controller{
             'name' => $request->name,
             'slug' => $this->slug($request->name),
             'body' => $request->body,
-            'position' => $request->position,
-            'selector' => $request->selector
+            'placements' => json_encode($request->placements),
         ]);
         return redirect("/smart-ad-manager/ads/{$smartAd->id}")->with(['message' => 'Ad Created', 'color' => 'green']);
     }
@@ -54,7 +53,7 @@ class SmartAdManagerController extends Controller{
     }
 
     public function autoAds(){
-        $ads = SmartAd::whereNotNull('position')->get();
+        $ads = SmartAd::whereNotNull('placements')->get();
         return $ads;
     }
 

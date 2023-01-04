@@ -11,7 +11,7 @@
     <link href="{{asset('vendor/smart-ads/css/app.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/smart-ads/css/prism.css')}}" rel="stylesheet">
     <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
       defer
     ></script>
     <script src="{{asset('vendor/smart-ads/js/init-alpine.js')}}"></script>

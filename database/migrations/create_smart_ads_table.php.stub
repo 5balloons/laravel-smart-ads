@@ -21,8 +21,7 @@ class CreateSmartAdsTable extends Migration
             $table->integer('views')->default(0);
             $table->integer('clicks')->default(0);
             $table->boolean('enabled')->nullable();
-            $table->string('position')->nullable();
-            $table->string('selector')->nullable();
+            $table->json('placements')->nullable();
             $table->timestamps();
         });
     }
