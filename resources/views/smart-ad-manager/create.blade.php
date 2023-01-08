@@ -65,28 +65,26 @@
                     <div :id="$id('accordion-item')" x-show="isAccordionOpen($id('accordion-item'))" x-cloack="" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="scale-y-0" x-transition:enter-end="scale-y-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="scale-y-100" x-transition:leave-end="scale-y-0" class="transition-transform ease-out overflow-hidden origin-top transform p-3">
 
                       <div x-data="{
-                            fields: [
-                              {
-                                position: '',
-                                selector: '',
-                              }
-                              ],
-                            addNewField() {
-                                this.fields.push({
+                            placements : [{
+                              position : '',
+                              selector : ''
+                            }],
+                            addNewPlacement() {
+                                this.placements.push({
                                     position: '',
                                     selector: ''
                                 });
                               },
-                              removeField(index) {
-                                this.fields.splice(index, 1);
+                              removePlacement(index) {
+                                this.placements.splice(index, 1);
                               }
                             }">
-                        <template x-for="(field, index) in fields" :key="index">
+                        <template x-for="(placement, index) in placements" :key="index">
                           <div class="rounded bg-gray-200 border border-gray-400 p-2 my-3">
-                            <div class="text-red-500 text-sm cursor-pointer" @click="removeField(index)">Remove</div>
+                            <div class="text-red-500 text-sm cursor-pointer" @click="removePlacement(index)">Remove</div>
                             <label class="block mt-2 text-sm">
                               <span class="text-gray-700 dark:text-gray-400">Ad Position <span x-text="index+1"></span></span>
-                              <select :name="'placements['+index+'][position]'" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+                              <select x-model="placement.position" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
                                 <option value="">None</option>
                                 <option value="beforebegin">Before HTML Selector</option>
                                 <option value="afterend">After HTML Selector</option>
@@ -99,12 +97,13 @@
                               <span class="text-gray-700 dark:text-gray-400">Selector <span x-text="index+1"></span></span>
                               <input
                                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                placeholder="CSS Selector like #id-name / .class-name / body > p" :name="'placements['+index+'][selector]'" value="{{old('name')}}"
+                                placeholder="CSS Selector like #id-name / .class-name / body > p"  x-model="placement.selector"
                               />
                             </label>
                           </div>
                         </template>
-                        <div class="text-sm mt-2 cursor-pointer" @click="addNewField()">Add More placement</div>                        
+                        <div class="text-sm mt-2 cursor-pointer" @click="addNewPlacement()">Add More placement</div>                        
+                        <input type="hidden" :value="JSON.stringify(placements)" name="placements" />                        
                       </div>
 
                       

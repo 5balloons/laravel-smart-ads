@@ -8,7 +8,32 @@ fetch('/smart-ads-auto-placements')
           if(adSelector){
             let adBody = "<div id=\"smart-ad\" ad-slug=\""+ad.slug+"\">"+ad.body+"</div>"
             adSelector.insertAdjacentHTML(placement.position, adBody);
+            document.querySelector('#smart-ad').addEventListener('click', updateClick);
           }
       });
     });
 });
+
+function updateClick(e){
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+     let slug = e.target.getAttribute('ad-slug');
+     fetch('/smart-ads-update-clicks', {
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json, text-plain, */*",
+              "X-Requested-With": "XMLHttpRequest",
+              "X-CSRF-TOKEN": token
+              },
+             method: 'post',
+             credentials: "same-origin",
+             body: JSON.stringify({
+                 slug: slug,
+             })
+      }).catch(function(error) {
+             console.log(error);
+      });
+}
+
+
+
+

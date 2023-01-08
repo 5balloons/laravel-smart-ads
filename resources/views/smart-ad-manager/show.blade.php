@@ -18,17 +18,43 @@
                 {{$smartAd->slug}}
             </h4>
             <div class="my-1 font-semibold text-gray-800">Ad Body</div>
+
             <p class="text-gray-600 dark:text-gray-400">
                 <pre><code class="lang-html">
                     {{ $smartAd->body }}
                 </code></pre>
             </p>
-            <p class="text-gray-600 mt-5">
-            <div class="my-1 font-semibold text-gray-800">Usage</div>
-            <div class="bg-gray-600 text-white rounded p-3">
-                <span>@</span>livewire('smart-ad-component', ['ad' => '{{$smartAd->slug}}'])
+
+            <div class="text-gray-600 mt-5">
+                <div class="my-1 font-semibold text-gray-800">Usage (Manual Placement)</div>
+                <div class="bg-gray-600 text-white rounded p-3">
+                    <span><</span>x-smart-ad-component slug="{{$smartAd->slug}}"/>
+                </div>
             </div>
-            </p>
+
+            @isset($smartAd->placements)
+            <div class="mt-5">
+                <div class="my-1 font-semibold text-gray-800">Auto Placement</div>
+                @foreach(json_decode($smartAd->placements) as $placement)
+                @switch($placement->position)
+                    @case('beforebegin')
+                        Before HTML Element
+                    @break
+                    @case('afterend')
+                        Before HTML Element
+                    @break
+                    @case('afterbegin')
+                        Inside HTML Selector (At Beginning)
+                    @break
+                    @case('beforeend')
+                        Inside HTML Selector (At End)
+                    @break
+                @endswitch
+                    -> {{$placement->selector}} <br/>
+                @endforeach
+            </div>
+            @endisset
+
         </div>
 
         

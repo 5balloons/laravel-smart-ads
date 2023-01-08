@@ -38,26 +38,84 @@
                 @enderror
               </label>
 
-              <h3 class="my-3">Automatic Ad Insertion (Optional)</h3>
+              <div x-data="{
+                selected: null,
+                toggle(event){
+                  var collapseRef = event.currentTarget.getAttribute('aria-controls');
 
-              <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Ad Position</span>
-                <select name="position" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-                  <option value="">None</option>
-                  <option value="beforebegin" {{$smartAd->position == 'beforebegin' ? 'selected' : ''}}>Before HTML Selector</option>
-                  <option value="afterend" {{$smartAd->position == 'afterend' ? 'selected' : ''}}>After HTML Selector</option>
-                  <option value="afterbegin" {{$smartAd->position == 'afterbegin' ? 'selected' : ''}}>Inside HTML Selector (At Beginning)</option>
-                  <option value="beforeend" {{$smartAd->position == 'beforeend' ? 'selected' : ''}}>Inside HTML Selector (At End)</option>
-                </select>
-              </label>
+                  this.selected = (collapseRef !== this.selected) ? collapseRef : null;
+                },
+                isAccordionOpen(collapseRef){
+                    return this.selected == collapseRef ? true : false;
+                },
+                defaultOpen(collapseRef){
+                    this.selected = collapseRef;
+                }
+              }" class="my-3">
+                <div x-id="['accordion-item']" class="bg-white border">
+                    <div class="mb-0 font-lg">
+                    <button x-on:click="toggle" type="button" :aria-expanded="isAccordionOpen($id('accordion-item'))" :aria-controls="$id('accordion-item')" class="flex items-center justify-between p-3 w-full focus:border focus:border-blue-200" :class="isAccordionOpen($id('accordion-item')) &amp;&amp; 'bg-blue-100 text-blue-800'" @keydown.space.prevent.stop="toggle">
+                        <span class="font-semibold">Automatic Ad Insertion (Optional)</span>
+                        <span>
+                            <svg class="rotate-0 h-6 w-6 transform" :class="isAccordionOpen($id('accordion-item')) && 'rotate-180'" x-transition="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                          </span>
+                        </button>
+                    </div>
+                    <div :id="$id('accordion-item')" x-show="isAccordionOpen($id('accordion-item'))" x-cloack="" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="scale-y-0" x-transition:enter-end="scale-y-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="scale-y-100" x-transition:leave-end="scale-y-0" class="transition-transform ease-out overflow-hidden origin-top transform p-3">
 
-              <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Selector</span>
-                <input
-                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="CSS Selector like #id-name / .class-name / body > p" name="selector" value="{{$smartAd->selector}}"
-                />
-              </label>
+                      <div x-data="{
+                            placements: [
+                              @foreach(json_decode($smartAd->placements) as $placement)
+                              {
+                                position: '{{$placement->position}}',
+                                selector: '{{$placement->selector}}'
+                              },
+                              @endforeach
+                            ],
+                            addNewPlacement() {
+                                this.placements.push({
+                                    position: '',
+                                    selector: ''
+                                });
+                              },
+                              removePlacement(index) {
+                                this.placements.splice(index, 1);
+                              }
+                            }">
+                      
+                        <template x-for="(placement, index) in placements" :key="index">
+                          <div class="rounded bg-gray-200 border border-gray-400 p-2 my-3">
+                            <div class="text-red-500 text-sm cursor-pointer" @click="removePlacement(index)">Remove</div>
+                            <label class="block mt-2 text-sm">
+                              <span class="text-gray-700 dark:text-gray-400">Ad Position <span x-text="index+1"></span></span>
+                              <select x-model="placement.position"  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+                                <option value="">None</option>
+                                <option value="beforebegin">Before HTML Selector</option>
+                                <option value="afterend">After HTML Selector</option>
+                                <option value="afterbegin">Inside HTML Selector (At Beginning)</option>
+                                <option value="beforeend">Inside HTML Selector (At End)</option>
+                              </select>
+                            </label>
+
+                            <label class="block mt-4 text-sm">
+                              <span class="text-gray-700 dark:text-gray-400">Selector <span x-text="index+1"></span></span>
+                              <input
+                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                placeholder="CSS Selector like #id-name / .class-name / body > p"  x-model="placement.selector"
+                              />
+                            </label>
+                          </div>
+                        </template>
+                        <div class="text-sm mt-2 cursor-pointer" @click="addNewPlacement()">Add More placement</div>
+                        <input type="hidden" :value="JSON.stringify(placements)" name="placements" />                        
+                      </div>
+
+                      
+                    </div>
+                </div>
+              </div>
 
               <div class="my-3">
                 <button type="submit" class="inline-flex items-center rounded-md  bg-purple-600 border border-transparent active:bg-purple-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">Update</button>

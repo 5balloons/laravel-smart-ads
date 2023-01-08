@@ -29,7 +29,7 @@ class SmartAdManagerController extends Controller{
             'name' => $request->name,
             'slug' => $this->slug($request->name),
             'body' => $request->body,
-            'placements' => json_encode($request->placements),
+            'placements' => $request->placements,
         ]);
         return redirect("/smart-ad-manager/ads/{$smartAd->id}")->with(['message' => 'Ad Created', 'color' => 'green']);
     }
@@ -41,8 +41,7 @@ class SmartAdManagerController extends Controller{
     public function update(StoreSmartAdRequest $request, SmartAd $smartAd){
         $smartAd->name = $request->name;
         $smartAd->body = $request->body;
-        $smartAd->position = $request->position;
-        $smartAd->selector = $request->selector;
+        $smartAd->placements = $request->placements;
         $smartAd->save();
         return redirect("/smart-ad-manager/ads/{$smartAd->id}")->with(['message' => 'Ad Edited', 'color' => 'green']);
     }
