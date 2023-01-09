@@ -24,15 +24,6 @@ class LaravelSmartAdsServiceProvider extends PackageServiceProvider
 
     }
 
-    public function bootingPackage()
-    {
-        $this->registerLivewireComponents();
-    }
-
-    public function registerLivewireComponents(){
-        Livewire::component('smart-ad-component', SmartAdComponent::class);
-    }
-
     /**
      * Register the application services.
      */
