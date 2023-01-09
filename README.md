@@ -51,7 +51,7 @@ The ad manager dashboard can now be accessed at `/smart-ad-manager`
 
 You can create a new ad by navigating to `smart-ad-manager/ads/create` page and then providing a valid name and HTML body of the Ad. 
 
-![alt text](https://raw.githubusercontent.com/5balloons/laravel-smart-ads/main/art/smart-ads-create.png)
+![alt text](https://raw.githubusercontent.com/5balloons/laravel-smart-ads/main/art/smart-ads-create-new.png)
 
 
 ### Placing Ads (Manual Placement)
