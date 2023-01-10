@@ -68,7 +68,7 @@ You can choose to auto place at the ads at the desired locations on the website 
 In order to make use of Auto Ad placement and ads click tracking you must place the following JS in your header (typically this would go in your blade layout file)
 
 ```html
-<script src="{{ asset('vendor/smart-ads/js/smart-ads.js') }}"></script>
+<script src="{{ asset('vendor/smart-ads/js/smart-banner.js') }}"></script>
 ```
 
 ### Tracking Clicks
