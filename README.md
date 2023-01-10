@@ -71,6 +71,14 @@ In order to make use of Auto Ad placement and ads click tracking you must place 
 <script src="{{ asset('vendor/smart-ads/js/smart-ads.js') }}"></script>
 ```
 
+### Tracking Clicks
+
+Tracking clicks is enabled by default and in order for it to work you must include a global meta csrf token in your blade template file, inside the head element of your HTML.
+
+```html
+<meta name="csrf-token" content="{{ csrf_token() }}">
+```
+
 
 ### Testing
 
