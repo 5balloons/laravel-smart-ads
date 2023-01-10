@@ -54,22 +54,29 @@ You can create a new ad by navigating to `smart-ad-manager/ads/create` page and 
 ![alt text](https://raw.githubusercontent.com/5balloons/laravel-smart-ads/main/art/smart-ads-create-new.png)
 
 
-### Placing Ads (Manual Placement)
+### Placing Ads 
+
+In order to place the ads and track clicks you must place the following JS in your header (typically this would go in your blade layout file)
+
+```html
+<script src="{{ asset('vendor/smart-ads/js/smart-banner.js') }}"></script>
+```
+
+There are two ways in which you can place ads / banners in your application
+
+#### (Manual Placement)
 To manually place an ad you can copy the blade component code from the view ad page and place it at desired location in your blade file. For example an ad with the slug of your-example-ad can be placed with the following code.
 
 ```html
 <x-smart-ad-component slug="your-example-ad"/>
 ```
 
-### Placing Ads (Auto Placement)
+#### (Auto Placement)
 
 You can choose to auto place at the ads at the desired locations on the website by providing the CSS selector where you are looking to place the ad and choosing the position (Before selector, After selector, inside selector etc. to place the ad)
 
-In order to make use of Auto Ad placement and ads click tracking you must place the following JS in your header (typically this would go in your blade layout file)
+![alt text](https://raw.githubusercontent.com/5balloons/laravel-smart-ads/main/art/ad-auto-placement.png)
 
-```html
-<script src="{{ asset('vendor/smart-ads/js/smart-banner.js') }}"></script>
-```
 
 ### Tracking Clicks
 
