@@ -36,20 +36,20 @@
             <div class="mt-5">
                 <div class="my-1 font-semibold text-gray-800">Auto Placement</div>
                 @foreach(json_decode($smartAd->placements) as $placement)
-                @switch($placement->position)
-                    @case('beforebegin')
-                        Before HTML Element
-                    @break
-                    @case('afterend')
-                        Before HTML Element
-                    @break
-                    @case('afterbegin')
-                        Inside HTML Selector (At Beginning)
-                    @break
-                    @case('beforeend')
-                        Inside HTML Selector (At End)
-                    @break
-                @endswitch
+                    @switch($placement->position)
+                        @case('beforebegin')
+                            Before HTML Element
+                        @break
+                        @case('afterend')
+                            Before HTML Element
+                        @break
+                        @case('afterbegin')
+                            Inside HTML Selector (At Beginning)
+                        @break
+                        @case('beforeend')
+                            Inside HTML Selector (At End)
+                        @break
+                    @endswitch
                     -> {{$placement->selector}} <br/>
                 @endforeach
             </div>
