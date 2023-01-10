@@ -17,5 +17,5 @@ Route::group(['prefix' => $prefix, 'middleware' => $middleware], function () {
     Route::delete('/smart-ad-manager/ads/delete/{smartAd}', [SmartAdManagerController::class, 'delete']);
 });
 
-Route::get('/smart-ads-auto-placements', [SmartAdManagerController::class, 'autoAds']);
-Route::post('/smart-ads-update-clicks', [SmartAdManagerController::class, 'updateClicks']);
+Route::get('/smart-banner-auto-placements', [SmartAdManagerController::class, 'autoAds']);
+Route::post('/smart-banner-update-clicks', [SmartAdManagerController::class, 'updateClicks']);

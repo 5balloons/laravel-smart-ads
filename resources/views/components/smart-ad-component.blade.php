@@ -1,5 +1,5 @@
 @isset($smartAd)
-<div class="smart-ad-temp" ad-slug="{{$smartAd->slug}}">
+<div class="smart-banner-temp" banner-slug="{{$smartAd->slug}}">
     {!! $smartAd->body !!}
 </div>
 @endisset

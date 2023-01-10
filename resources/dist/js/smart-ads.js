@@ -1,4 +1,4 @@
-fetch('/smart-ads-auto-placements')
+fetch('/smart-banner-auto-placements')
   .then((response) => response.json())
   .then((ads) => {
     ads.forEach(function(ad){
@@ -8,7 +8,7 @@ fetch('/smart-ads-auto-placements')
           if(placement.selector){
             var adSelector = document.querySelector(placement.selector);
             if(adSelector){
-              let adBody = "<div class=\"smart-ad-temp\" ad-slug=\""+ad.slug+"\">"+ad.body+"</div>"
+              let adBody = "<div class=\"smart-banner-temp\" banner-slug=\""+ad.slug+"\">"+ad.body+"</div>"
               adSelector.insertAdjacentHTML(placement.position, adBody);
             }
           }
@@ -16,23 +16,23 @@ fetch('/smart-ads-auto-placements')
     });
 
     //Remove the parent temp element (smart-ad-temp), since it messes with the CSS Design for some ads 
-    var smartAd = document.querySelector('.smart-ad-temp');
+    var smartAd = document.querySelector('.smart-banner-temp');
       if(smartAd){
-        let adSlug = smartAd.getAttribute('ad-slug');
-        smartAd.firstElementChild.setAttribute("ad-slug", adSlug);
-        smartAd.firstElementChild.classList.add("smart-ad");
-        document.querySelectorAll(".smart-ad-temp").forEach(EL => EL.replaceWith(...EL.childNodes));
+        let adSlug = smartAd.getAttribute('banner-slug');
+        smartAd.firstElementChild.setAttribute("banner-slug", adSlug);
+        smartAd.firstElementChild.classList.add("smart-banner");
+        document.querySelectorAll(".smart-banner-temp").forEach(EL => EL.replaceWith(...EL.childNodes));
 
         //Attach click event
-        document.querySelector('.smart-ad').addEventListener('click', updateClick);
+        document.querySelector('.smart-banner').addEventListener('click', updateClick);
       }
 });
 
 //Event listener function for updating clicks 
 function updateClick(e){
     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-     let slug = e.target.closest('.smart-ad').getAttribute('ad-slug');
-     fetch('/smart-ads-update-clicks', {
+     let slug = e.target.closest('.smart-banner').getAttribute('banner-slug');
+     fetch('/smart-banner-update-clicks', {
             headers: {
               "Content-Type": "application/json",
               "Accept": "application/json, text-plain, */*",
