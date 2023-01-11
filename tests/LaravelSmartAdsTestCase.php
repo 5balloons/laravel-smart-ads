@@ -7,9 +7,13 @@ use Illuminate\Support\Facades\View;
 use Livewire\LivewireServiceProvider;
 use _5balloons\LaravelSmartAds\LaravelSmartAdsFacade;
 use _5balloons\LaravelSmartAds\LaravelSmartAdsServiceProvider;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
 class LaravelSmartAdsTestCase extends TestCase
 {
+    use InteractsWithViews;
+
+    
     protected function setUp(): void
     {
         parent::setUp();
@@ -20,7 +24,6 @@ class LaravelSmartAdsTestCase extends TestCase
 
     protected function getPackageProviders($app){
         return[
-            LivewireServiceProvider::class,
             LaravelSmartAdsServiceProvider::class,
         ];
     }

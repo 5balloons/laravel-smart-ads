@@ -11,10 +11,11 @@ class SmartAdFactory extends Factory
 
     public function definition()
     {
+        $adname = fake()->word.' '.fake()->word;
         return [
-            'name' => fake()->word.' '.fake()->word,
+            'name' => $adname,
             'body' => fake()->randomHtml(),
-            
+            'slug' => implode('-', explode(' ', $adname))
         ];
     }
 }
