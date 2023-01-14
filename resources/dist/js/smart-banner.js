@@ -16,16 +16,20 @@ fetch('/smart-banner-auto-placements')
     });
 
     //Remove the parent temp element (smart-ad-temp), since it messes with the CSS Design for some ads 
-    var smartAd = document.querySelector('.smart-banner-temp');
-      if(smartAd){
-        let adSlug = smartAd.getAttribute('banner-slug');
-        smartAd.firstElementChild.setAttribute("banner-slug", adSlug);
-        smartAd.firstElementChild.classList.add("smart-banner");
-        document.querySelectorAll(".smart-banner-temp").forEach(EL => EL.replaceWith(...EL.childNodes));
+    var smartAds = document.querySelectorAll('.smart-banner-temp');
+    //console.log(smartAds);
+    smartAds.forEach(function(smartAd){
+      let adSlug = smartAd.getAttribute('banner-slug');
+      smartAd.firstElementChild.setAttribute("banner-slug", adSlug);
+      smartAd.firstElementChild.classList.add("smart-banner");
+      smartAd.replaceWith(...smartAd.childNodes);
+    });
 
-        //Attach click event
-        document.querySelector('.smart-banner').addEventListener('click', updateClick);
-      }
+    var smartAds = document.querySelectorAll('.smart-banner');
+    smartAds.forEach(function(smartAd){
+        smartAd.addEventListener('click', updateClick);
+    });
+
 });
 
 //Event listener function for updating clicks 
