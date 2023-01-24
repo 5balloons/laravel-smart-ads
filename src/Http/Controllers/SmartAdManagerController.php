@@ -10,6 +10,10 @@ use _5balloons\LaravelSmartAds\Http\Requests\StoreSmartAdRequest;
 
 class SmartAdManagerController extends Controller{
 
+    public function dashboard(){
+        return view('smart-ads::smart-ad-manager.dashboard');
+    }
+
     public function index(){
         $smartAds = SmartAd::paginate(10);
         $totalClicks = SmartAd::sum('clicks');

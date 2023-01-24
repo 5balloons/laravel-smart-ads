@@ -8,7 +8,8 @@ $prefix = config('smart-ads.route.prefix');
 $middleware = config('smart-ads.route.middleware');
 
 Route::group(['prefix' => $prefix, 'middleware' => $middleware], function () {
-    Route::get('/smart-ad-manager', [SmartAdManagerController::class, 'index']);
+    Route::get('/smart-ad-manager', [SmartAdManagerController::class, 'dashboard']);
+    Route::get('/smart-ad-manager/ads', [SmartAdManagerController::class, 'index']);
     Route::get('/smart-ad-manager/ads/create', [SmartAdManagerController::class, 'create']);
     Route::get('/smart-ad-manager/ads/{smartAd}', [SmartAdManagerController::class, 'show']);
     Route::post('/smart-ad-manager/ads/store', [SmartAdManagerController::class, 'store']);

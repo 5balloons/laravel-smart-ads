@@ -24,6 +24,7 @@ class LaravelSmartAdsTestCase extends TestCase
 
     protected function getPackageProviders($app){
         return[
+            LivewireServiceProvider::class,
             LaravelSmartAdsServiceProvider::class,
         ];
     }
@@ -44,8 +45,10 @@ class LaravelSmartAdsTestCase extends TestCase
 
         // import the CreatePostsTable class from the migration
         require_once __DIR__ . '/../database/migrations/create_smart_ads_table.php.stub';
+        require_once __DIR__ . '/../database/migrations/create_smart_ads_tracking_table.php.stub';
 
         // run the up() method of that migration class
         (new \CreateSmartAdsTable)->up();
+        (new \CreateSmartAdsTrackingTable)->up();
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use _5balloons\LaravelSmartAds\Components\SmartAdComponent;
+use _5balloons\LaravelSmartAds\Http\Livewire\AdReportComponent;
 
 class LaravelSmartAdsServiceProvider extends PackageServiceProvider
 {
@@ -20,8 +21,17 @@ class LaravelSmartAdsServiceProvider extends PackageServiceProvider
         ->hasRoute('web')
         ->hasAssets()
         ->hasViewComponents('', SmartAdComponent::class)
-        ->hasMigration('create_smart_ads_table');
+        ->hasMigrations(['create_smart_ads_table','create_smart_ads_tracking_table']);
 
+    }
+
+    public function bootingPackage()
+    {
+        $this->registerLivewireComponents();
+    }
+
+    public function registerLivewireComponents(){
+        Livewire::component('ad-report-component', AdReportComponent::class);
     }
 
     /**

@@ -10,6 +10,7 @@
     />
     <link href="{{asset('vendor/smart-ads/css/app.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/smart-ads/css/prism.css')}}" rel="stylesheet">
+    @yield('styles')
     <script
       src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
       defer
@@ -20,6 +21,7 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
       defer
     ></script>
+    @livewireStyles
   </head>
   <body>
     <div
@@ -38,5 +40,7 @@
         </main>
       </div>
     </div>
+    @yield('scripts')
+    @livewireScripts
   </body>
 </html>
