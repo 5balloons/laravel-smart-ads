@@ -12,6 +12,7 @@ use _5balloons\LaravelSmartAds\Models\SmartAdTracking;
 use _5balloons\LaravelSmartAds\Tests\LaravelSmartAdsTestCase;
 use _5balloons\LaravelSmartAds\Http\Livewire\AdReportComponent;
 use _5balloons\LaravelAdManager\Database\Factories\LaravelAdFactory;
+use _5balloons\LaravelSmartAds\LaravelSmartAds;
 
 class SmartAdDashboardTest extends LaravelSmartAdsTestCase
 {
@@ -38,6 +39,81 @@ class SmartAdDashboardTest extends LaravelSmartAdsTestCase
 
         $component = Livewire::test(AdReportComponent::class);
         $component->assertSet('totalClicksThisMonth', 37);
+    }
+
+    /** @test */
+    public function it_asserts_correct_data_is_sent_to_graph(){
+
+        //Given that we have ad tracking for the last 7 days
+        SmartAdTracking::factory()->create(['totalClicks' => 5]);
+        SmartAdTracking::factory()->create(['totalClicks' => 10, 'created_at' => Carbon::yesterday()]);
+        SmartAdTracking::factory()->create(['totalClicks' => 7, 'created_at' => Carbon::today()->subDays(2)]);
+        SmartAdTracking::factory()->create(['totalClicks' => 1, 'created_at' => Carbon::today()->subDays(3)]);
+        SmartAdTracking::factory()->create(['totalClicks' => 3, 'created_at' => Carbon::today()->subDays(5)]);
+        SmartAdTracking::factory()->create(['totalClicks' => 4, 'created_at' => Carbon::today()->subDays(6)]);
+        SmartAdTracking::factory()->create(['totalClicks' => 5, 'created_at' => Carbon::today()->subDays(7)]);
+
+        $component = Livewire::test(AdReportComponent::class)
+                        ->set('reportStartDate', Carbon::today()->subDays(7)->format('Y-m-d'))
+                        ->set('reportEndDate', Carbon::today()->format('Y-m-d'))
+                        ->call('calculateClicksReport');
+
+                
+        $component->assertSet('clicksPerDate', [
+                        '2023-01-18' => 5,
+                        '2023-01-19' => 4,
+                        '2023-01-20' => 3,
+                        '2023-01-21' => 0,
+                        '2023-01-22' => 1,
+                        '2023-01-23' => 7,
+                        '2023-01-24' => 10,
+                        '2023-01-25' => 5
+        ]);
+        
+    }
+
+    /** @test */
+    public function it_asserts_correct_ad_clicks_are_shown_in_report(){
+        //Given that we have an ad
+        $smartAd = SmartAd::factory()->create();
+        //That has been clicked over the span of few days
+        SmartAdTracking::factory()->create(['ad_clicks' => json_encode([$smartAd->slug => '5'])]);
+        SmartAdTracking::factory()->create(['ad_clicks' => json_encode([$smartAd->slug => '5']),  'created_at' => Carbon::yesterday()]);
+        SmartAdTracking::factory()->create(['ad_clicks' => json_encode([$smartAd->slug => '7']),  'created_at' => Carbon::today()->subDays(2)]);
+        SmartAdTracking::factory()->create(['ad_clicks' => json_encode([$smartAd->slug => '10']),  'created_at' => Carbon::today()->subDays(3)]);
+
+        $component = Livewire::test(AdReportComponent::class)
+                        ->set('reportStartDate', Carbon::today()->subDays(7)->format('Y-m-d'))
+                        ->set('reportEndDate', Carbon::today()->format('Y-m-d'))
+                        ->call('calculateClicksReport');
+
+        $component->assertSet('clicksPerAd', [
+                $smartAd->slug => 27,
+        ]);                        
+
+    }
+
+    /** @test */
+    public function it_asserts_correct_ad_clicks_for_multiple_ads_are_shown_in_report(){
+        //Given that we have two ads
+        $smartAd1 = SmartAd::factory()->create();
+        $smartAd2 = SmartAd::factory()->create();
+        //That has been clicked over the span of few days
+        SmartAdTracking::factory()->create(['ad_clicks' => json_encode([$smartAd1->slug => '5'])]);
+        SmartAdTracking::factory()->create(['ad_clicks' => json_encode([$smartAd1->slug => '5', $smartAd2->slug => '6']),  'created_at' => Carbon::yesterday()]);
+        SmartAdTracking::factory()->create(['ad_clicks' => json_encode([$smartAd1->slug => '7']),  'created_at' => Carbon::today()->subDays(2)]);
+        SmartAdTracking::factory()->create(['ad_clicks' => json_encode([$smartAd1->slug => '10', $smartAd2->slug => '5']),  'created_at' => Carbon::today()->subDays(3)]);
+
+        $component = Livewire::test(AdReportComponent::class)
+                        ->set('reportStartDate', Carbon::today()->subDays(7)->format('Y-m-d'))
+                        ->set('reportEndDate', Carbon::today()->format('Y-m-d'))
+                        ->call('calculateClicksReport');
+
+        $component->assertSet('clicksPerAd', [
+                $smartAd1->slug => 27,
+                $smartAd2->slug => 11,
+        ]);                        
+
     }
     
 }
