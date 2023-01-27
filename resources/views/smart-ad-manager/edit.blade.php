@@ -130,12 +130,19 @@
 
                       <div x-data="{
                             placements: [
-                              @foreach(json_decode($smartAd->placements) as $placement)
-                              {
-                                position: '{{$placement->position}}',
-                                selector: '{{$placement->selector}}'
-                              },
+                              @isset($smartAd->placements)
+                                @foreach(json_decode($smartAd->placements) as $placement)
+                                {
+                                  position: '{{$placement->position}}',
+                                  selector: '{{$placement->selector}}'
+                                },
                               @endforeach
+                              @else
+                                {
+                                  position: '',
+                                  selector: ''
+                                }
+                              @endisset
                             ],
                             addNewPlacement() {
                                 this.placements.push({
