@@ -5,7 +5,7 @@
             Create New Ad
         </h2>
 
-        <form action="/smart-ad-manager/ads/store" method="POST">
+        <form action="/smart-ad-manager/ads/store" method="POST" enctype="multipart/form-data">
             @csrf
         <div
               class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
@@ -23,19 +23,81 @@
                 @enderror
               </label>
 
-              <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Ad Body</span>
-                <textarea
-                  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                  rows="7"
-                  placeholder="Enter html body of the form." name="body"
-                >{{old('body')}}</textarea>
-                @error('body')
-                <span class="text-xs text-red-600 dark:text-red-400">
-                  {{$message}}
-                </span>
-                @enderror
-              </label>
+              <div x-data="{
+                  adType: '{{!empty(old('adType'))  ? old('adType') : 'HTML'}}'
+                }">
+                <div class="w-max flex mt-4">
+                    <label class="text-gray-700 my-1 flex items-center mr-4">
+                        <input x-model="adType" type="radio" name="adType" value="HTML" class="mr-2 w-4 h-4" checked="">
+                        <span>HTML Ad</span>
+                    </label>
+                    <label class="text-gray-700 my-1 flex items-center mr-4">
+                        <input x-model="adType" type="radio" name="adType" value="IMAGE" class="mr-2 w-4 h-4">
+                        <span>Image Ad</span>
+                    </label>
+                </div>
+
+                <div x-show="adType == 'HTML'">
+                  <label class="block mt-4 text-sm">
+                    <span class="text-gray-700 dark:text-gray-400">Ad Body</span>
+                    <textarea
+                      class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                      rows="7"
+                      placeholder="Enter html body of the form." name="body"
+                    >{{old('body')}}</textarea>
+                    @error('body')
+                    <span class="text-xs text-red-600 dark:text-red-400">
+                      {{$message}}
+                    </span>
+                    @enderror
+                  </label>
+              </div>
+
+                <div x-show="adType == 'IMAGE'">
+                  <div>
+                    <label class="w-96 mt-4 block text-sm">
+                      <span class="text-gray-700 dark:text-gray-400">Upload Image File</span>
+                        <input type="file" name="image" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="formFile">
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+                        @error('image')
+                        <span class="text-xs text-red-600 dark:text-red-400">
+                          {{$message}}
+                        </span>
+                        @enderror
+                    </label>
+
+                    <label class="block text-sm mt-4">
+                        <span class="text-gray-700 dark:text-gray-400">Image URL</span>
+                        <input
+                          class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                          placeholder="Image URL" name="imageUrl" value="{{old('imageURL')}}"
+                        />
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="image_url_help">url address where advert should redirect on click</p>
+                        @error('imageUrl')
+                        <span class="text-xs text-red-600 dark:text-red-400">
+                          {{$message}}
+                        </span>
+                        @enderror
+                    </label>
+
+                    <label class="block text-sm mt-4">
+                        <span class="text-gray-700 dark:text-gray-400">Image Alt</span>
+                        <input
+                          class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                          placeholder="Image Alt Text" name="imageAlt" value="{{old('imageAlt')}}"
+                        />
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="image_url_help">Image alt parameter tag</p>
+                        @error('imageAlt')
+                        <span class="text-xs text-red-600 dark:text-red-400">
+                          {{$message}}
+                        </span>
+                        @enderror
+                    </label>
+                  </div>
+
+
+              </div>
+              </div>
 
               <div x-data="{
                 selected: null,
@@ -116,6 +178,7 @@
               </div>
 
             </div>
+            <input type="hidden" name="form_type" value="create" />
         </form>
 
 

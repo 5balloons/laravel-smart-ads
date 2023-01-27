@@ -24,12 +24,19 @@ class StoreSmartAdRequest extends FormRequest
      */
     public function rules()
     {
+        if($this->form_type == 'edit'){
+            $image_rule = "nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048";
+        }else{
+            $image_rule = "required_if:adType,IMAGE|image|mimes:jpg,png,jpeg,gif,svg|max:2048";
+        }
         return [
             'name' => [
                 'required',
                 Rule::unique('smart_ads', 'name')->ignore($this->smartAd)
             ],
-            "body" => "required"
+            "body" => "required_if:adType,HTML",
+            "image" => $image_rule,
+            "imageUrl" => "nullable|url"
         ];
     }
 }

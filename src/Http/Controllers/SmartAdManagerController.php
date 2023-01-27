@@ -29,10 +29,19 @@ class SmartAdManagerController extends Controller{
     }
 
     public function store(StoreSmartAdRequest $request){
+
+        if(isset($request->image)){
+            $imagePath = $request->file('image')->store('image', 'public');
+        }
+
         $smartAd = SmartAd::create([
             'name' => $request->name,
             'slug' => $this->slug($request->name),
-            'body' => $request->body,
+            'adType' => $request->adType,
+            'body' => isset($request->body) ? $request->body : null,
+            'image' => isset($imagePath) ? $imagePath : null,
+            'imageUrl' => $request->imageUrl,
+            'imageAlt' => $request->imageAlt,
             'placements' => $request->placements,
         ]);
         return redirect("/smart-ad-manager/ads/{$smartAd->id}")->with(['message' => 'Ad Created', 'color' => 'green']);

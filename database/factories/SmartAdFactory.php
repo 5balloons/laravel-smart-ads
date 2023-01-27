@@ -15,6 +15,7 @@ class SmartAdFactory extends Factory
         return [
             'name' => $adname,
             'body' => fake()->randomHtml(),
+            'adType' => 'HTML',
             'slug' => implode('-', explode(' ', $adname))
         ];
     }

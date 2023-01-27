@@ -17,13 +17,26 @@
             <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
                 {{$smartAd->slug}}
             </h4>
-            <div class="my-1 font-semibold text-gray-800">Ad Body</div>
+            
 
+            @if($smartAd->adType == "HTML")
+            <div class="my-1 font-semibold text-gray-800">Ad HTML Body</div>
             <p class="text-gray-600 dark:text-gray-400">
                 <pre><code class="lang-html">
                     {{ $smartAd->body }}
                 </code></pre>
             </p>
+            @elseif($smartAd->adType == "IMAGE")
+            <div class="my-1 font-semibold text-gray-800">Ad Image</div>
+            <p class="text-gray-600 dark:text-gray-400">
+               <img src="{{asset($smartAd->image)}}" alt="{{$smartAd->imageAlt}}" />
+            </p>
+
+            <div class="my-1 font-semibold text-gray-800">Image URL</div>
+            <p class="text-gray-500 dark:text-gray-400">
+               <p>{{$smartAd->imageUrl}}</p>
+            </p>
+            @endif
 
             <div class="text-gray-600 mt-5">
                 <div class="my-1 font-semibold text-gray-800">Usage (Manual Placement)</div>
@@ -32,28 +45,34 @@
                 </div>
             </div>
 
-            @isset($smartAd->placements)
             <div class="mt-5">
                 <div class="my-1 font-semibold text-gray-800">Auto Placement</div>
-                @foreach(json_decode($smartAd->placements) as $placement)
-                    @switch($placement->position)
-                        @case('beforebegin')
-                            Before HTML Element
-                        @break
-                        @case('afterend')
-                            Before HTML Element
-                        @break
-                        @case('afterbegin')
-                            Inside HTML Selector (At Beginning)
-                        @break
-                        @case('beforeend')
-                            Inside HTML Selector (At End)
-                        @break
-                    @endswitch
-                    -> {{$placement->selector}} <br/>
-                @endforeach
+                @isset($smartAd->placements)
+                    @foreach(json_decode($smartAd->placements) as $placement)
+                        @if(!empty($placement->selector))
+                            @switch($placement->position)
+                                @case('beforebegin')
+                                    Before HTML Element
+                                @break
+                                @case('afterend')
+                                    Before HTML Element
+                                @break
+                                @case('afterbegin')
+                                    Inside HTML Selector (At Beginning)
+                                @break
+                                @case('beforeend')
+                                    Inside HTML Selector (At End)
+                                @break
+                            @endswitch
+                            -> {{$placement->selector}} <br/>
+                        @endif
+                    @endforeach
+                @else
+                    <p> No Auto placements set for this Ad</p>
+                @endisset
+
+
             </div>
-            @endisset
 
         </div>
 

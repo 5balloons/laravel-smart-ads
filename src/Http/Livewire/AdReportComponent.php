@@ -70,7 +70,7 @@ class AdReportComponent extends Component
             array_push($this->clicksPerAd, ['name' => $ad->name,  'clicks' => $adClicksCollection->sum($ad->slug)]);
         }
 
-        $this->clicksPerAd = collect($this->clicksPerAd)->sortByDesc('clicks')->values()->all();;
+        $this->clicksPerAd = collect($this->clicksPerAd)->sortByDesc('clicks')->values()->all();
 
         $this->emit('renderChart');
 

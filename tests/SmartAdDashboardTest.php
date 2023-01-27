@@ -60,14 +60,14 @@ class SmartAdDashboardTest extends LaravelSmartAdsTestCase
 
                 
         $component->assertSet('clicksPerDate', [
-                        '2023-01-18' => 5,
-                        '2023-01-19' => 4,
-                        '2023-01-20' => 3,
-                        '2023-01-21' => 0,
-                        '2023-01-22' => 1,
-                        '2023-01-23' => 7,
-                        '2023-01-24' => 10,
-                        '2023-01-25' => 5
+                        Carbon::today()->subDays(7)->format('Y-m-d') => 5,
+                        Carbon::today()->subDays(6)->format('Y-m-d') => 4,
+                        Carbon::today()->subDays(5)->format('Y-m-d') => 3,
+                        Carbon::today()->subDays(4)->format('Y-m-d') => 0,
+                        Carbon::today()->subDays(3)->format('Y-m-d') => 1,
+                        Carbon::today()->subDays(2)->format('Y-m-d') => 7,
+                        Carbon::today()->subDays(1)->format('Y-m-d') => 10,
+                        Carbon::today()->subDays(0)->format('Y-m-d') => 5
         ]);
         
     }
@@ -88,7 +88,10 @@ class SmartAdDashboardTest extends LaravelSmartAdsTestCase
                         ->call('calculateClicksReport');
 
         $component->assertSet('clicksPerAd', [
-                $smartAd->slug => 27,
+            [
+                'name' => $smartAd->name,
+                'clicks' => 27
+            ]
         ]);                        
 
     }
@@ -110,8 +113,14 @@ class SmartAdDashboardTest extends LaravelSmartAdsTestCase
                         ->call('calculateClicksReport');
 
         $component->assertSet('clicksPerAd', [
-                $smartAd1->slug => 27,
-                $smartAd2->slug => 11,
+            [
+                'name' => $smartAd1->name,
+                'clicks' => 27
+            ],
+            [
+                'name' => $smartAd2->name,
+                'clicks' => 11
+            ]
         ]);                        
 
     }
