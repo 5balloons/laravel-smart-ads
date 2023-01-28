@@ -42,6 +42,7 @@ class SmartAdManagerController extends Controller{
             'image' => isset($imagePath) ? $imagePath : null,
             'imageUrl' => $request->imageUrl,
             'imageAlt' => $request->imageAlt,
+            'enabled' => true,
             'placements' => !empty(json_decode($request->placements)[0]->selector) ? $request->placements : null,
         ]);
         return redirect("/smart-ad-manager/ads/{$smartAd->id}")->with(['message' => 'Ad Created', 'color' => 'green']);
