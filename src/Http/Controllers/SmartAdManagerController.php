@@ -15,7 +15,7 @@ class SmartAdManagerController extends Controller{
     }
 
     public function index(){
-        $smartAds = SmartAd::paginate(10);
+        $smartAds = SmartAd::orderBy('enabled', 'DESC')->orderBy('name')->paginate(10);
         $totalClicks = SmartAd::sum('clicks');
         return view('smart-ads::smart-ad-manager.index', compact('smartAds', 'totalClicks'));
     }
@@ -61,7 +61,7 @@ class SmartAdManagerController extends Controller{
 
     public function delete(SmartAd $smartAd){
         $smartAd->delete();
-        return redirect('/smart-ad-manager')->with(['message' => 'Ad Deleted', 'color' => 'green']);
+        return redirect('/smart-ad-manager/ads')->with(['message' => 'Ad Deleted', 'color' => 'green']);
     }
 
     public function autoAds(){
@@ -75,6 +75,20 @@ class SmartAdManagerController extends Controller{
     public function updateClicks(Request $request){
         $slug = $request->get('slug');
         LaravelSmartAdsFacade::updateClicks($slug);
+    }
+
+    //*Enable the Ad */
+    public function enable(SmartAd $smartAd){
+        $smartAd->enabled = true;
+        $smartAd->save();
+        return redirect('/smart-ad-manager/ads')->with(['message' => 'Ad Enabled', 'color' => 'green']);
+    }
+
+     //*Disable the Ad */
+     public function disable(SmartAd $smartAd){
+        $smartAd->enabled = false;
+        $smartAd->save();
+        return redirect('/smart-ad-manager/ads')->with(['message' => 'Ad Disabled', 'color' => 'green']);
     }
 
     protected function slug($data)

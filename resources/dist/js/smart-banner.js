@@ -2,6 +2,8 @@ fetch('/smart-banner-auto-placements')
   .then((response) => response.json())
   .then((ads) => {
     ads.forEach(function(ad){
+      //Check if ad is enabled
+      if(ad.enabled){
       //Loop through the ads and auto place them using insertAdjacentHTML
       let placements = JSON.parse(ad.placements);
       placements.forEach(function(placement){
@@ -21,7 +23,8 @@ fetch('/smart-banner-auto-placements')
               adSelector.insertAdjacentHTML(placement.position, adBody);
             }
           }
-      });
+        });
+      }
     });
 
     //Remove the parent temp element (smart-ad-temp), since it messes with the CSS Design for some ads 
