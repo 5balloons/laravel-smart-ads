@@ -1,3 +1,5 @@
 {
-    "/resources/dist/css/app.css": "/resources/dist/css/app.css"
+    "/resources/dist/css/app.css": "/resources/dist/css/app.css",
+    "/resources/dist/js/banner-manager.js": "/resources/dist/js/banner-manager.js",
+    "/resources/dist/js/smart-banner.min.js": "/resources/dist/js/smart-banner.min.js"
 }

@@ -15,8 +15,7 @@
       src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
       defer
     ></script>
-    <script src="{{asset('vendor/smart-ads/js/init-alpine.js')}}"></script>
-    <script src="{{asset('vendor/smart-ads/js/prism.js')}}"></script>
+    <script src="{{asset('vendor/smart-ads/js/banner-manager.js')}}"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
       defer
