@@ -4,7 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/5balloons/laravel-smart-ads.svg?style=flat-square)](https://packagist.org/packages/5balloons/laravel-smart-ads)
 ![GitHub Actions](https://github.com/5balloons/laravel-smart-ads/actions/workflows/main.yml/badge.svg)
 
-![alt text](https://raw.githubusercontent.com/5balloons/laravel-smart-ads/main/art/Laravel%20Smart%20Ads.png)
+![alt text](/art/Laravel%20Smart%20Ads.png?raw=true "Larvel Smart Ads Dashboard")
 
 Simple Ad, Banner, Callouts Manager for Laravel. 
 
