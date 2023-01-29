@@ -26,6 +26,7 @@ class SmartAdTrackingTest extends LaravelSmartAdsTestCase
         //Ad Clicks gets updated in smart_ads_tracking_table
         $smartAdTracking = SmartAdTracking::whereDate('created_at', Carbon::today())->first();
         $this->assertEquals(1, json_decode($smartAdTracking->ad_clicks)->{$smartAd->slug});
+        $this->assertEquals(1, $smartAdTracking->totalClicks);
     }
 
 
@@ -39,6 +40,7 @@ class SmartAdTrackingTest extends LaravelSmartAdsTestCase
         //Ad Clicks gets updated in smart_ads_tracking_table
         $smartAdTracking = SmartAdTracking::whereDate('created_at', Carbon::today())->first();
         $this->assertEquals(2, json_decode($smartAdTracking->ad_clicks)->{$smartAd->slug});
+        $this->assertEquals(2, $smartAdTracking->totalClicks);
     }
 
     /** @test */
@@ -53,6 +55,7 @@ class SmartAdTrackingTest extends LaravelSmartAdsTestCase
         $smartAdTracking = SmartAdTracking::whereDate('created_at', Carbon::today())->first();
         $this->assertEquals(1, json_decode($smartAdTracking->ad_clicks)->{$smartAd1->slug});
         $this->assertEquals(1, json_decode($smartAdTracking->ad_clicks)->{$smartAd2->slug});
+        $this->assertEquals(2, $smartAdTracking->totalClicks);
     }
 
     /** @test */
@@ -70,6 +73,7 @@ class SmartAdTrackingTest extends LaravelSmartAdsTestCase
         $smartAdTracking = SmartAdTracking::whereDate('created_at', Carbon::today())->first();
         $this->assertEquals(3, json_decode($smartAdTracking->ad_clicks)->{$smartAd1->slug});
         $this->assertEquals(2, json_decode($smartAdTracking->ad_clicks)->{$smartAd2->slug});
+        $this->assertEquals(5, $smartAdTracking->totalClicks);
     }
 
 }

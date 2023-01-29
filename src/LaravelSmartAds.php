@@ -20,8 +20,10 @@ class LaravelSmartAds
             }else{
                 $ad_clicks->{$smartAd->slug} = 1; //First click of the day
             }
+            $totalClicks = $smartAdTracking->totalClicks + 1;
             $smartAdTracking->update([
-                'ad_clicks' => json_encode($ad_clicks)
+                'ad_clicks' => json_encode($ad_clicks),
+                'totalClicks' => $totalClicks
             ]);
         }else{
             SmartAdTracking::create([
