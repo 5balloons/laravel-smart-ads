@@ -134,7 +134,8 @@
                                 @foreach(json_decode($smartAd->placements) as $placement)
                                 {
                                   position: '{{$placement->position}}',
-                                  selector: '{{$placement->selector}}'
+                                  selector: '{{$placement->selector}}',
+                                  style: '{{$placement->style}}'
                                 },
                               @endforeach
                               @else
@@ -174,6 +175,14 @@
                               <input
                                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                 placeholder="CSS Selector like #id-name / .class-name / body > p"  x-model="placement.selector"
+                              />
+                            </label>
+
+                            <label class="block mt-4 text-sm">
+                              <span class="text-gray-700 dark:text-gray-400">Custom CSS Style <span x-text="index+1"></span></span>
+                              <input
+                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                placeholder="CSS Styles float:left; margin: 10px;"  x-model="placement.style"
                               />
                             </label>
                           </div>

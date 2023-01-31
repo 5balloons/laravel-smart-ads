@@ -53,8 +53,16 @@ class SmartAdManagerController extends Controller{
     }
 
     public function update(StoreSmartAdRequest $request, SmartAd $smartAd){
+
+        if(isset($request->image)){
+            $imagePath = $request->file('image')->store('image', 'public');
+            $smartAd->image = $imagePath;
+        }
+
         $smartAd->name = $request->name;
-        $smartAd->body = $request->body;
+        $smartAd->body = isset($request->body) ? $request->body : null;
+        $smartAd->imageUrl = isset($request->imageUrl) ? $request->imageUrl : null;
+        $smartAd->imageAlt = isset($request->imageAlt) ? $request->imageAlt : null;
         $smartAd->placements = $request->placements;
         $smartAd->save();
         return redirect("/smart-ad-manager/ads/{$smartAd->id}")->with(['message' => 'Ad Edited', 'color' => 'green']);

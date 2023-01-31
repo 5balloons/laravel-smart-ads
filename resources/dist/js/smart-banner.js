@@ -12,12 +12,12 @@ fetch('/smart-banner-auto-placements')
             if(adSelector){
               let adBody = '';
               if(ad.adType == 'HTML'){
-                adBody = "<div class=\"smart-banner-temp\" banner-slug=\""+ad.slug+"\">"+ad.body+"</div>"
+                adBody = "<div class=\"smart-banner-temp\" banner-slug=\""+ad.slug+"\" style=\""+placement.style+"\">"+ad.body+"</div>"
               }else if(ad.adType == 'IMAGE'){
-                adBody = "<div class=\"smart-banner-temp\" banner-slug=\""+ad.slug+"\">\
-                         <a href=\""+ad.imageUrl+"\" target=\"_blank\">\
-                          <img src=\"storage/"+ad.image+"\" alt=\""+ad.imageAlt+"\" />\
-                         </a>\
+                adBody = "<div class=\"smart-banner-temp\" banner-slug=\""+ad.slug+"\" style=\""+placement.style+"\">\
+                          <a href=\""+(ad.imageUrl ? ad.imageUrl : '#')+"\" target=\"_blank\">\
+                            <img src=\"storage/"+ad.image+"\" alt=\""+ad.imageAlt+"\" />\
+                          </a>\
                          </div>"
               }
               adSelector.insertAdjacentHTML(placement.position, adBody);
@@ -32,7 +32,9 @@ fetch('/smart-banner-auto-placements')
     //console.log(smartAds);
     smartAds.forEach(function(smartAd){
       let adSlug = smartAd.getAttribute('banner-slug');
+      let adStyles = smartAd.getAttribute('style');
       smartAd.firstElementChild.setAttribute("banner-slug", adSlug);
+      smartAd.firstElementChild.setAttribute("style", adStyles);
       smartAd.firstElementChild.classList.add("smart-banner");
       smartAd.replaceWith(...smartAd.childNodes);
     });
