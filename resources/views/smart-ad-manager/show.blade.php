@@ -29,7 +29,7 @@
             @elseif($smartAd->adType == "IMAGE")
             <div class="my-1 font-semibold text-gray-800">Ad Image</div>
             <p class="text-gray-600 dark:text-gray-400">
-               <img src="{{asset($smartAd->image)}}" alt="{{$smartAd->imageAlt}}" />
+               <img src="{{asset('storage/'.$smartAd->image)}}" alt="{{$smartAd->imageAlt}}" />
             </p>
 
             <div class="my-1 font-semibold text-gray-800">Image URL</div>
