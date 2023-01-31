@@ -5,7 +5,7 @@
             Edit Ad
         </h2>
 
-        <form action="/smart-ad-manager/ads/update/{{$smartAd->id}}" method="POST">
+        <form action="/smart-ad-manager/ads/update/{{$smartAd->id}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
         <div
