@@ -6,6 +6,6 @@
 return [
     'route' =>[
         'prefix' => '',
-        'middleware' => 'web',
+        'middleware' => ['web'],
     ]
 ];

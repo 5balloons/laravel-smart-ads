@@ -62,7 +62,7 @@ You can create a new ad by navigating to `smart-ad-manager/ads/create` page and 
 In order to place the ads and track clicks you must place the following JS in your header (typically this would go in your blade layout file)
 
 ```html
-<script src="{{ asset('vendor/smart-ads/js/smart-banner.js') }}"></script>
+<script src="{{ asset('vendor/smart-ads/js/smart-banner.min.js') }}"></script>
 ```
 
 There are two ways in which you can place ads / banners in your application
