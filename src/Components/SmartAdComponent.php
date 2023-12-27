@@ -31,7 +31,7 @@ class SmartAdComponent extends Component
      */
     public function render()
     {
-        $smartAd = SmartAd::where('slug', $this->slug)->first();
+        $smartAd = SmartAd::where('slug', $this->slug)->where('enabled', true)->first();
         return view('smart-ads::components.smart-ad-component', compact('smartAd'));
     }
 }
